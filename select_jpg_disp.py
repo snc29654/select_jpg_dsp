@@ -38,5 +38,3 @@ thread1.start()
 thread2 = threading.Thread(target=jpg_select)
 thread2.start()
 
-
-
