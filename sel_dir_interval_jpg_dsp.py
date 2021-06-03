@@ -1,4 +1,4 @@
-#2021.06.03
+#フォルダー選択後インターバル時間間隔で表示
 import sys
 import tkinter
 from PIL import Image, ImageTk

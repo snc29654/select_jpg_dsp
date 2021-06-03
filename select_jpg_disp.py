@@ -1,3 +1,4 @@
+#フォルダー選択後固定間隔で表示
 import tkinter.filedialog
 from tkinter import filedialog as tkFileDialog
 import os
