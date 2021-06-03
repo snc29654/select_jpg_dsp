@@ -22,12 +22,12 @@ from tkinter import font
 class image_gui():  
     imgs = []
     def __init__(self, main):  
-        button1 = Button(root, text=u'ファイル選択', command=self.button1_clicked)  
+        button1 = Button(root, text=u'フォルダー選択', command=self.button1_clicked)  
         button1.grid(row=0, column=1)  
         button1.place(x=670, y=12) 
 
 
-        button2 = tk.Button(root, text = '選択終了', command=self.quit)
+        button2 = tk.Button(root, text = '実行', command=self.quit)
         button2.grid(row=0, column=1)  
         button2.place(x=770, y=12) 
 
@@ -46,25 +46,16 @@ class image_gui():
         if interval=="":
             txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
         else:
-            txt3.insert(tkinter.END,str(interval)+"s に設定しています。" )
+            txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
                 
         global filenames
-        fTyp = [('', '*')] 
-        iDir = os.path.abspath(os.path.dirname(__file__)) 
-        filenames = tkFileDialog.askopenfilenames(filetypes=fTyp, initialdir=iDir)
-        print (filenames)
-        x = 100
-        for n in filenames:
-            self.img = Image.open(n)
-            self.img = self.img.resize((75,112),Image.ANTIALIAS)
-            self.img = ImageTk.PhotoImage(self.img)
-            self.imgs.append(self.img) 
-            canvas = tk.Canvas(bg = "white", width=75, height=112)
-            self.out_image = ImageTk.PhotoImage(file=n)  
-            canvas.place(x=x, y=350) 
-            canvas.create_image(3,3, image=self.img,anchor=tk.NW)  
-            x += 100
-
+        ini_dir = 'C:'
+        ret = tkinter.filedialog.askdirectory(initialdir=ini_dir, title='file dialog test', mustexist = True)
+        print(str(ret))
+        os.chdir(str(ret))
+        filenames = []
+        filenames = glob.glob('*.jpg')
+        print(filenames)
 
     def quit(self):
         root.destroy()
@@ -82,7 +73,7 @@ def view_image():
  
 root = Tk()  
 root.title("Image Viewer")  
-root.geometry("1000x600") 
+root.geometry("850x600") 
 image_gui(root)  
 txt2 = tkinter.Entry(width=10)
 txt2.place(x=10, y=30)
