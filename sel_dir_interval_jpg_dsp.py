@@ -95,7 +95,11 @@ thread1.start()
 
 for n in filenames:
     img2 = Image.open(n)
-    img2 = img2.resize((900,600),Image.ANTIALIAS)
+    before_x, before_y = img2.size[0], img2.size[1]
+    x = int(round(float(300 / float(before_y) * float(before_x))))
+    y = 300
+    img2.thumbnail((x, y), Image.ANTIALIAS)
+    #img2 = img2.resize((900,600),Image.ANTIALIAS)
     img2 = ImageTk.PhotoImage(img2)
     canvas = tkinter.Canvas(bg = "white", width=900, height=600)
     canvas.place(x=0, y=0)
