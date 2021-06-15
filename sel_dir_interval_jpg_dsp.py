@@ -68,12 +68,12 @@ def view_image():
  
     root = tkinter.Tk()
     root.title('test')
-    root.geometry("450x350")
+    root.geometry("1000x650")
     root.mainloop()
  
 root = Tk()  
 root.title("Image Viewer")  
-root.geometry("850x600") 
+root.geometry("850x300") 
 image_gui(root)  
 txt2 = tkinter.Entry(width=10)
 txt2.place(x=10, y=30)
@@ -95,9 +95,9 @@ thread1.start()
 
 for n in filenames:
     img2 = Image.open(n)
-    img2 = img2.resize((400,300),Image.ANTIALIAS)
+    img2 = img2.resize((900,600),Image.ANTIALIAS)
     img2 = ImageTk.PhotoImage(img2)
-    canvas = tkinter.Canvas(bg = "white", width=400, height=300)
+    canvas = tkinter.Canvas(bg = "white", width=900, height=600)
     canvas.place(x=0, y=0)
     item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
     print(interval)
