@@ -18,6 +18,8 @@ from tkinter import filedialog as tkFileDialog
 import tkinter as tk
 from tkinter import font
 
+interval = 1.0
+sizerate = 1.0
 
 class image_gui():  
     imgs = []
@@ -38,16 +40,29 @@ class image_gui():
         label2.pack(side="top")
         label2.place(x=100, y=28) 
 
+        label4 = tkinter.Label(root, text="サイズ倍率", fg="red", bg="white", font=font1)
+        label4.pack(side="top")
+        label4.place(x=400, y=28) 
+
+
 
     def button1_clicked(self):  
         global interval
         interval =txt2.get()
+        global sizerate
+        sizerate =txt4.get()
         
         if interval=="":
             txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
         else:
             txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
-                
+
+        if sizerate=="":
+            txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
+        else:
+            txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
+
+
         global filenames
         ini_dir = 'C:'
         ret = tkinter.filedialog.askdirectory(initialdir=ini_dir, title='file dialog test', mustexist = True)
@@ -79,6 +94,10 @@ txt2 = tkinter.Entry(width=10)
 txt2.place(x=10, y=30)
 txt2.insert(tkinter.END,"1.0")
 
+txt4 = tkinter.Entry(width=10)
+txt4.place(x=330, y=30)
+txt4.insert(tkinter.END,"1.0")
+
 
 txt3 = tkinter.Entry(width=80)
 txt3.place(x=10, y=60)
@@ -92,19 +111,18 @@ thread1 = threading.Thread(target=view_image)
 thread1.start()
  
 
-
 for n in filenames:
     img2 = Image.open(n)
     before_x, before_y = img2.size[0], img2.size[1]
     x = int(round(float(300 / float(before_y) * float(before_x))))
     y = 300
-    img2.thumbnail((x, y), Image.ANTIALIAS)
+    img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
     #img2 = img2.resize((900,600),Image.ANTIALIAS)
     img2 = ImageTk.PhotoImage(img2)
     canvas = tkinter.Canvas(bg = "white", width=900, height=600)
     canvas.place(x=0, y=0)
     item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
-    print(interval)
+    print(sizerate)
     int_interval=float(interval)
     time.sleep(int_interval) 
     canvas.itemconfig(item,image=img2)
