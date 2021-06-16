@@ -82,8 +82,15 @@ def view_image():
     global item, canvas
  
     root = tkinter.Tk()
-    root.title('test')
+    root.title('jpg viewer')
     root.geometry("1000x650")
+
+    button4 = tk.Button(root, text = '終了', command=quit)
+    button4.grid(row=0, column=1)  
+    button4.place(x=930, y=50) 
+
+
+
     root.mainloop()
  
 root = Tk()  
