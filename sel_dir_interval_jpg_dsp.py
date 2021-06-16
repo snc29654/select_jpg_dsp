@@ -30,6 +30,10 @@ class image_gui():
         button1.grid(row=0, column=1)  
         button1.place(x=670, y=12) 
 
+        button3= Button(root, text=u'ファイル選択', command=self.button3_clicked)  
+        button3.grid(row=0, column=1)  
+        button3.place(x=670, y=42) 
+
 
         button2 = tk.Button(root, text = '実行', command=self.quit)
         button2.grid(row=0, column=1)  
@@ -73,6 +77,31 @@ class image_gui():
         filenames = []
         filenames = glob.glob('*.jpg')
         print(filenames)
+
+
+    def button3_clicked(self):  
+        global filenames
+        global interval
+        interval =txt2.get()
+        global sizerate
+        sizerate =txt4.get()
+        
+        if interval=="":
+            txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
+        else:
+            txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
+
+        if sizerate=="":
+            txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
+        else:
+            txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
+
+
+        fTyp = [('', '*')] 
+        iDir = os.path.abspath(os.path.dirname(__file__)) 
+        filenames = tkFileDialog.askopenfilenames(filetypes= [("Image file", ".bmp .png .jpg .tif"), ("Bitmap", ".bmp"), ("PNG", ".png"), ("JPEG", ".jpg"), ("Tiff", ".tif") ], initialdir=iDir)
+        print(filenames)
+
 
     def quit(self):
         root.destroy()
