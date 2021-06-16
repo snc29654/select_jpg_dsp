@@ -1,5 +1,6 @@
 #フォルダー選択後インターバル時間間隔で表示
 import sys
+import time
 import tkinter
 from PIL import Image, ImageTk
 import threading
@@ -75,8 +76,13 @@ class image_gui():
     def quit(self):
         root.destroy()
 
-
-
+suspend_flag = 0
+def suspend():
+    global suspend_flag
+    suspend_flag = 1
+def resume():
+    global suspend_flag
+    suspend_flag = 0
 
 def view_image():
     global item, canvas
@@ -85,10 +91,13 @@ def view_image():
     root.title('jpg viewer')
     root.geometry("1000x650")
 
-    button4 = tk.Button(root, text = '終了', command=quit)
+    button4 = tk.Button(root, text = '停止', command=suspend)
     button4.grid(row=0, column=1)  
     button4.place(x=930, y=50) 
 
+    button4 = tk.Button(root, text = '再開', command=resume)
+    button4.grid(row=0, column=1)  
+    button4.place(x=930, y=80) 
 
 
     root.mainloop()
@@ -119,6 +128,11 @@ thread1.start()
  
 
 for n in filenames:
+    if suspend_flag == 1:
+        while(1):
+            time.sleep(1)
+            if suspend_flag == 0:
+                break
     img2 = Image.open(n)
     before_x, before_y = img2.size[0], img2.size[1]
     x = int(round(float(300 / float(before_y) * float(before_x))))
