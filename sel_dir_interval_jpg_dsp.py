@@ -22,6 +22,7 @@ from tkinter import font
 interval = 1.0
 sizerate = 1.0
 
+#最初の画面のクラス
 class image_gui():  
     imgs = []
     def __init__(self, main):  
@@ -95,13 +96,40 @@ def view_image():
     button4.grid(row=0, column=1)  
     button4.place(x=930, y=50) 
 
-    button4 = tk.Button(root, text = '再開', command=resume)
-    button4.grid(row=0, column=1)  
-    button4.place(x=930, y=80) 
+    button5 = tk.Button(root, text = '再開', command=resume)
+    button5.grid(row=0, column=1)  
+    button5.place(x=930, y=80) 
 
+    button6 = tk.Button(root, text = '終了', command=quit)
+    button6.grid(row=0, column=1)  
+    button6.place(x=930, y=110) 
 
     root.mainloop()
  
+ 
+def change_image():
+    for n in filenames:
+        if suspend_flag == 1:
+            while(1):
+                time.sleep(1)
+                if suspend_flag == 0:
+                    break
+        img2 = Image.open(n)
+        before_x, before_y = img2.size[0], img2.size[1]
+        x = int(round(float(300 / float(before_y) * float(before_x))))
+        y = 300
+        img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
+        #img2 = img2.resize((900,600),Image.ANTIALIAS)
+        img2 = ImageTk.PhotoImage(img2)
+        canvas = tkinter.Canvas(bg = "white", width=900, height=600)
+        canvas.place(x=0, y=0)
+        item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+        print(sizerate)
+        int_interval=float(interval)
+        time.sleep(int_interval) 
+        canvas.itemconfig(item,image=img2)
+
+
 root = Tk()  
 root.title("Image Viewer")  
 root.geometry("850x300") 
@@ -121,29 +149,14 @@ txt3.insert(tkinter.END,"")
 
 
 root.mainloop() 
+#実行ボタンにより先へ進む
 
 
+
+#jpg表示画面を表示
 thread1 = threading.Thread(target=view_image)
 thread1.start()
- 
 
-for n in filenames:
-    if suspend_flag == 1:
-        while(1):
-            time.sleep(1)
-            if suspend_flag == 0:
-                break
-    img2 = Image.open(n)
-    before_x, before_y = img2.size[0], img2.size[1]
-    x = int(round(float(300 / float(before_y) * float(before_x))))
-    y = 300
-    img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
-    #img2 = img2.resize((900,600),Image.ANTIALIAS)
-    img2 = ImageTk.PhotoImage(img2)
-    canvas = tkinter.Canvas(bg = "white", width=900, height=600)
-    canvas.place(x=0, y=0)
-    item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
-    print(sizerate)
-    int_interval=float(interval)
-    time.sleep(int_interval) 
-    canvas.itemconfig(item,image=img2)
+#jpgの変更処理
+thread2 = threading.Thread(target=change_image)
+thread2.start()
