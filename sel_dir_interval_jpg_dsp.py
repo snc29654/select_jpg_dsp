@@ -114,6 +114,24 @@ def resume():
     global suspend_flag
     suspend_flag = 0
 
+def speedup():
+    global interval
+    interval = float(interval) - 0.1
+
+def speeddown():
+    global interval
+    interval = float(interval) + 0.1
+
+
+def sizeup():
+    global sizerate
+    sizerate = float(sizerate) + 0.1
+
+def sizedown():
+    global sizerate
+    sizerate = float(sizerate) - 0.1
+
+
 def view_image():
     global item, canvas
  
@@ -132,6 +150,24 @@ def view_image():
     button6 = tk.Button(root, text = '終了', command=quit)
     button6.grid(row=0, column=1)  
     button6.place(x=930, y=110) 
+
+    button7 = tk.Button(root, text = '加速', command=speedup)
+    button7.grid(row=0, column=1)  
+    button7.place(x=930, y=140) 
+
+    button8 = tk.Button(root, text = '減速', command=speeddown)
+    button8.grid(row=0, column=1)  
+    button8.place(x=930, y=170) 
+
+    button9 = tk.Button(root, text = '拡大', command=sizeup)
+    button9.grid(row=0, column=1)  
+    button9.place(x=930, y=200) 
+
+    button10 = tk.Button(root, text = '縮小', command=sizedown)
+    button10.grid(row=0, column=1)  
+    button10.place(x=930, y=230) 
+
+
 
     root.mainloop()
  
@@ -153,7 +189,10 @@ def change_image():
         canvas = tkinter.Canvas(bg = "white", width=900, height=600)
         canvas.place(x=0, y=0)
         item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+        print("size")
         print(sizerate)
+        print("int")
+        print(interval)
         int_interval=float(interval)
         time.sleep(int_interval) 
         canvas.itemconfig(item,image=img2)
