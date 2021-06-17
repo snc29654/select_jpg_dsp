@@ -116,7 +116,8 @@ def resume():
 
 def speedup():
     global interval
-    interval = float(interval) - 0.1
+    if(float(interval) > 0.1):
+        interval = float(interval) - 0.1
 
 def speeddown():
     global interval
