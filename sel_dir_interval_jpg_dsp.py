@@ -21,6 +21,8 @@ from tkinter import font
 
 interval = 1.0
 sizerate = 1.0
+filenames =[]
+
 
 #最初の画面のクラス
 class image_gui():  
@@ -174,6 +176,8 @@ def view_image():
  
  
 def change_image():
+    txt2 = tk.Entry(width=100)
+    txt2.place(x=90, y=600)
     for n in filenames:
         if suspend_flag == 1:
             while(1):
@@ -197,6 +201,8 @@ def change_image():
         int_interval=float(interval)
         time.sleep(int_interval) 
         canvas.itemconfig(item,image=img2)
+        txt2.delete(0, tk.END)
+        txt2.insert(tk.END,n)
 
 
 root = Tk()  
