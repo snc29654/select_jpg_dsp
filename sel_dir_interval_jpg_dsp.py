@@ -134,6 +134,12 @@ def sizedown():
     global sizerate
     sizerate = float(sizerate) - 0.1
 
+def initial():
+    #jpgの変更処理
+    thread3 = threading.Thread(target=change_image)
+    thread3.start()
+
+
 
 def view_image():
     global item, canvas
@@ -170,6 +176,9 @@ def view_image():
     button10.grid(row=0, column=1)  
     button10.place(x=930, y=230) 
 
+    button11 = tk.Button(root, text = '最初から', command=initial)
+    button11.grid(row=0, column=1)  
+    button11.place(x=930, y=260) 
 
 
     root.mainloop()
