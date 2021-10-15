@@ -73,11 +73,11 @@ class image_gui():
 
         self.root.mainloop() 
 
-
-    def button1_clicked(self):  
+    def check_value(self):
 
         global interval
 
+        self.txt3.delete(0, tk.END)      
 
 
         interval =self.txt2.get()
@@ -90,10 +90,13 @@ class image_gui():
             self.txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
 
         if sizerate=="":
-            self.txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
+            self.txt3.insert(tkinter.END,str(sizerate)+"倍率が未設定です。")
         else:
-            self.txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
+            self.txt3.insert(tkinter.END,str(sizerate)+"倍に設定しています。" )
 
+    def button1_clicked(self):  
+
+        self.check_value()
 
         global filenames
         ini_dir = 'C:'
@@ -107,23 +110,9 @@ class image_gui():
 
     def button3_clicked(self):  
         global filenames
-        global interval
 
+        self.check_value()
 
-
-        interval =self.txt2.get()
-        global sizerate
-        sizerate =self.txt4.get()
-        
-        if interval=="":
-            self.txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
-        else:
-            self.txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
-
-        if sizerate=="":
-            self.txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
-        else:
-            self.txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
 
 
         fTyp = [('', '*')] 
