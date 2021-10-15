@@ -27,48 +27,72 @@ filenames =[]
 #最初の画面のクラス
 class image_gui():  
     imgs = []
-    def __init__(self, main):  
-        button1 = Button(root, text=u'フォルダー選択', command=self.button1_clicked)  
+    def __init__(self):  
+        self.root = Tk()  
+        self.root.title("Image Viewer")  
+        self.root.geometry("850x300") 
+
+
+        self.txt2 = tkinter.Entry(width=10)
+        self.txt2.place(x=10, y=30)
+        self.txt2.insert(tkinter.END,"1.0")
+        self.txt3 = tkinter.Entry(width=80)
+        self.txt3.place(x=10, y=60)
+        self.txt3.insert(tkinter.END,"")
+
+        self.txt4 = tkinter.Entry(width=10)
+        self.txt4.place(x=330, y=30)
+        self.txt4.insert(tkinter.END,"1.0")
+
+
+
+
+        button1 = Button(self.root, text=u'フォルダー選択', command=self.button1_clicked)  
         button1.grid(row=0, column=1)  
         button1.place(x=670, y=12) 
 
-        button3= Button(root, text=u'ファイル選択', command=self.button3_clicked)  
+        button3= Button(self.root, text=u'ファイル選択', command=self.button3_clicked)  
         button3.grid(row=0, column=1)  
         button3.place(x=670, y=42) 
 
 
-        button2 = tk.Button(root, text = '実行', command=self.quit)
+        button2 = tk.Button(self.root, text = '実行', command=self.quit)
         button2.grid(row=0, column=1)  
         button2.place(x=770, y=12) 
 
 
         #文字色、背景色、サイズ、フォントを指定。
         font1 = font.Font(family='Helvetica', size=12, weight='bold')
-        label2 = tkinter.Label(root, text="インターバル(秒）", fg="red", bg="white", font=font1)
+        label2 = tkinter.Label(self.root, text="インターバル(秒）", fg="red", bg="white", font=font1)
         label2.pack(side="top")
         label2.place(x=100, y=28) 
 
-        label4 = tkinter.Label(root, text="サイズ倍率", fg="red", bg="white", font=font1)
+        label4 = tkinter.Label(self.root, text="サイズ倍率", fg="red", bg="white", font=font1)
         label4.pack(side="top")
         label4.place(x=400, y=28) 
 
+        self.root.mainloop() 
 
 
     def button1_clicked(self):  
+
         global interval
-        interval =txt2.get()
+
+
+
+        interval =self.txt2.get()
         global sizerate
-        sizerate =txt4.get()
+        sizerate =self.txt4.get()
         
         if interval=="":
-            txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
+            self.txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
         else:
-            txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
+            self.txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
 
         if sizerate=="":
-            txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
+            self.txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
         else:
-            txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
+            self.txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
 
 
         global filenames
@@ -84,19 +108,22 @@ class image_gui():
     def button3_clicked(self):  
         global filenames
         global interval
-        interval =txt2.get()
+
+
+
+        interval =self.txt2.get()
         global sizerate
-        sizerate =txt4.get()
+        sizerate =self.txt4.get()
         
         if interval=="":
-            txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
+            self.txt3.insert(tkinter.END,str(interval)+"インターバルが未設定です。")
         else:
-            txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
+            self.txt3.insert(tkinter.END,str(interval)+"秒 に設定しています。" )
 
         if sizerate=="":
-            txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
+            self.txt3.insert(tkinter.END,str(interval)+"倍率が未設定です。")
         else:
-            txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
+            self.txt3.insert(tkinter.END,str(interval)+"倍に設定しています。" )
 
 
         fTyp = [('', '*')] 
@@ -106,7 +133,7 @@ class image_gui():
 
 
     def quit(self):
-        root.destroy()
+        self.root.destroy()
 
 class sub_gui():
     def __init__(self):
@@ -230,28 +257,10 @@ class sub_gui():
     def quit(self):
         self.root.destroy()
 
-root = Tk()  
-root.title("Image Viewer")  
-root.geometry("850x300") 
-image_gui(root)  
+image_gui()  
 
 s=sub_gui()
-txt2 = tkinter.Entry(width=10)
-txt2.place(x=10, y=30)
-txt2.insert(tkinter.END,"1.0")
 
-txt4 = tkinter.Entry(width=10)
-txt4.place(x=330, y=30)
-txt4.insert(tkinter.END,"1.0")
-
-
-txt3 = tkinter.Entry(width=80)
-txt3.place(x=10, y=60)
-txt3.insert(tkinter.END,"")
-
-
-root.mainloop() 
-#実行ボタンにより先へ進む
 
 
 
