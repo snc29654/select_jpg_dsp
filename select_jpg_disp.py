@@ -111,6 +111,23 @@ class image_gui():
 class sub_gui():
     def __init__(self):
         self.suspend_flag = 0
+
+    def key_handler(self,e):
+        
+        print(e.keycode)
+
+        if(e.keycode==38):
+            self.sizeup()
+        if(e.keycode==40):
+            self.sizedown()
+
+        if(e.keycode==37):
+            self.speeddown()
+        if(e.keycode==39):
+            self.speedup()
+
+
+
     def suspend(self):
         self.suspend_flag = 1
     def resume(self):
@@ -160,19 +177,19 @@ class sub_gui():
         button6.grid(row=0, column=1)  
         button6.place(x=930, y=110) 
 
-        button7 = tk.Button(self.root, text = '加速', command=self.speedup)
+        button7 = tk.Button(self.root, text = '加速(->)', command=self.speedup)
         button7.grid(row=0, column=1)  
         button7.place(x=930, y=140) 
 
-        button8 = tk.Button(self.root, text = '減速', command=self.speeddown)
+        button8 = tk.Button(self.root, text = '減速(<-)', command=self.speeddown)
         button8.grid(row=0, column=1)  
         button8.place(x=930, y=170) 
 
-        button9 = tk.Button(self.root, text = '拡大', command=self.sizeup)
+        button9 = tk.Button(self.root, text = '拡大(↑）', command=self.sizeup)
         button9.grid(row=0, column=1)  
         button9.place(x=930, y=200) 
 
-        button10 = tk.Button(self.root, text = '縮小', command=self.sizedown)
+        button10 = tk.Button(self.root, text = '縮小(↓)', command=self.sizedown)
         button10.grid(row=0, column=1)  
         button10.place(x=930, y=230) 
 
@@ -180,6 +197,7 @@ class sub_gui():
         button11.grid(row=0, column=1)  
         button11.place(x=930, y=260) 
 
+        self.root.bind("<KeyPress>", self.key_handler)
 
         self.root.mainloop()
  
