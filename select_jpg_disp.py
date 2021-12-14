@@ -219,29 +219,30 @@ class sub_gui():
  
  
     def change_image(self):
-        for n in filenames:
-            if self.suspend_flag == 1:
-                while(1):
-                    time.sleep(1)
-                    if self.suspend_flag == 0:
-                        break
-            img2 = Image.open(n)
-            before_x, before_y = img2.size[0], img2.size[1]
-            x = int(round(float(300 / float(before_y) * float(before_x))))
-            y = 300
-            img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
-            #img2 = img2.resize((900,600),Image.ANTIALIAS)
-            img2 = ImageTk.PhotoImage(img2)
-            canvas = tkinter.Canvas(bg = "white", width=900, height=600)
-            canvas.place(x=0, y=0)
-            item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
-            print("size")
-            print(sizerate)
-            print("int")
-            print(interval)
-            int_interval=float(interval)
-            time.sleep(int_interval) 
-            canvas.itemconfig(item,image=img2)
+        while(1):
+            for n in filenames:
+                if self.suspend_flag == 1:
+                    while(1):
+                        time.sleep(1)
+                        if self.suspend_flag == 0:
+                            break
+                img2 = Image.open(n)
+                before_x, before_y = img2.size[0], img2.size[1]
+                x = int(round(float(300 / float(before_y) * float(before_x))))
+                y = 300
+                img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
+                #img2 = img2.resize((900,600),Image.ANTIALIAS)
+                img2 = ImageTk.PhotoImage(img2)
+                canvas = tkinter.Canvas(bg = "white", width=900, height=600)
+                canvas.place(x=0, y=0)
+                item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+                print("size")
+                print(sizerate)
+                print("int")
+                print(interval)
+                int_interval=float(interval)
+                time.sleep(int_interval) 
+                canvas.itemconfig(item,image=img2)
 
     def quit(self):
         self.root.destroy()
