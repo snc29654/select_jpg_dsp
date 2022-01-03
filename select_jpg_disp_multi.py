@@ -23,7 +23,6 @@ import random
 interval = 1.0
 sizerate = 1.0
 filenames =[]
-filenames2 =[]
 
 
 #最初の画面のクラス
@@ -101,21 +100,17 @@ class image_gui():
         self.check_value()
 
         global filenames
-        global filenames2
         ini_dir = 'C:'
         ret = tkinter.filedialog.askdirectory(initialdir=ini_dir, title='file dialog test', mustexist = True)
         print(str(ret))
         os.chdir(str(ret))
         filenames = []
-        filenames2 = []
         filenames = glob.glob('*.jpg')
-        filenames2 = glob.glob('*.jpg')
         print(filenames)
 
 
     def button3_clicked(self):  
         global filenames
-        global filenames2
 
         self.check_value()
 
@@ -124,7 +119,6 @@ class image_gui():
         fTyp = [('', '*')] 
         iDir = os.path.abspath(os.path.dirname(__file__)) 
         filenames = tkFileDialog.askopenfilenames(filetypes= [("Image file", ".bmp .png .jpg .tif"), ("Bitmap", ".bmp"), ("PNG", ".png"), ("JPEG", ".jpg"), ("Tiff", ".tif") ], initialdir=iDir)
-        filenames2=filenames
         print(filenames)
 
 
@@ -186,7 +180,7 @@ class sub_gui():
  
         self.root = tkinter.Tk()
         self.root.title('jpg viewer')
-        self.root.geometry("1000x650")
+        self.root.geometry("1000x700")
 
         button4 = tk.Button(self.root, text = '停止', command=self.suspend)
         button4.grid(row=0, column=1)  
@@ -227,30 +221,32 @@ class sub_gui():
  
     def change_image(self):
         while(1):
+            no=0
             for n in filenames:
-                if self.suspend_flag == 1:
-                    while(1):
-                        time.sleep(1)
-                        if self.suspend_flag == 0:
-                            break
-                img2 = Image.open(n)
-                before_x, before_y = img2.size[0], img2.size[1]
-                x = int(round(float(300 / float(before_y) * float(before_x))))
-                y = 300
-                img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
-                #img2 = img2.resize((900,600),Image.ANTIALIAS)
-                img2 = ImageTk.PhotoImage(img2)
-                canvas = tkinter.Canvas(bg = "white", width=400, height=300)
-                canvas.place(x=0, y=0)
-                item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
-                print("size")
-                print(sizerate)
-                print("int")
-                print(interval)
-                int_interval=float(interval)
-                time.sleep(int_interval) 
-                canvas.itemconfig(item,image=img2)
-
+                if(no%4==0):
+                    if self.suspend_flag == 1:
+                        while(1):
+                            time.sleep(1)
+                            if self.suspend_flag == 0:
+                                break
+                    img2 = Image.open(n)
+                    before_x, before_y = img2.size[0], img2.size[1]
+                    x = int(round(float(300 / float(before_y) * float(before_x))))
+                    y = 300
+                    img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
+                    #img2 = img2.resize((900,600),Image.ANTIALIAS)
+                    img2 = ImageTk.PhotoImage(img2)
+                    canvas = tkinter.Canvas(bg = "white", width=400, height=300)
+                    canvas.place(x=0, y=0)
+                    item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+                    print("size")
+                    print(sizerate)
+                    print("int")
+                    print(interval)
+                    int_interval=float(interval)
+                    time.sleep(int_interval) 
+                    canvas.itemconfig(item,image=img2)
+                no=no+1
 
 
 
@@ -258,34 +254,93 @@ class sub_gui():
 
 
     def change_image2(self):
-        random.shuffle(filenames2)
         while(1):
-            for n in filenames2:
-                if self.suspend_flag == 1:
-                    while(1):
-                        time.sleep(1)
-                        if self.suspend_flag == 0:
-                            break
-                img2 = Image.open(n)
-                before_x, before_y = img2.size[0], img2.size[1]
-                x = int(round(float(300 / float(before_y) * float(before_x))))
-                y = 300
-                img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
-                #img2 = img2.resize((900,600),Image.ANTIALIAS)
-                img2 = ImageTk.PhotoImage(img2)
-                canvas = tkinter.Canvas(bg = "white", width=400, height=300)
-                canvas.place(x=500, y=0)
-                item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
-                print("size")
-                print(sizerate)
-                print("int")
-                print(interval)
-                int_interval=float(interval)
-                time.sleep(int_interval) 
-                canvas.itemconfig(item,image=img2)
+            no=0
+            for n in filenames:
+                if(no%4==1):
+                    if self.suspend_flag == 1:
+                        while(1):
+                            time.sleep(1)
+                            if self.suspend_flag == 0:
+                                break
+                    img2 = Image.open(n)
+                    before_x, before_y = img2.size[0], img2.size[1]
+                    x = int(round(float(300 / float(before_y) * float(before_x))))
+                    y = 300
+                    img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
+                    #img2 = img2.resize((900,600),Image.ANTIALIAS)
+                    img2 = ImageTk.PhotoImage(img2)
+                    canvas = tkinter.Canvas(bg = "white", width=400, height=300)
+                    canvas.place(x=500, y=0)
+                    item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+                    print("size")
+                    print(sizerate)
+                    print("int")
+                    print(interval)
+                    int_interval=float(interval)
+                    time.sleep(int_interval) 
+                    canvas.itemconfig(item,image=img2)
+                no=no+1
 
 
+    def change_image3(self):
+        while(1):
+            no=0
+            for n in filenames:
+                if(no%4==2):
+                    if self.suspend_flag == 1:
+                        while(1):
+                            time.sleep(1)
+                            if self.suspend_flag == 0:
+                                break
+                    img2 = Image.open(n)
+                    before_x, before_y = img2.size[0], img2.size[1]
+                    x = int(round(float(300 / float(before_y) * float(before_x))))
+                    y = 300
+                    img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
+                    #img2 = img2.resize((900,600),Image.ANTIALIAS)
+                    img2 = ImageTk.PhotoImage(img2)
+                    canvas = tkinter.Canvas(bg = "white", width=400, height=300)
+                    canvas.place(x=0, y=300)
+                    item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+                    print("size")
+                    print(sizerate)
+                    print("int")
+                    print(interval)
+                    int_interval=float(interval)
+                    time.sleep(int_interval) 
+                    canvas.itemconfig(item,image=img2)
+                no=no+1
 
+
+    def change_image4(self):
+        while(1):
+            no=0
+            for n in filenames:
+                if(no%4==3):
+                    if self.suspend_flag == 1:
+                        while(1):
+                            time.sleep(1)
+                            if self.suspend_flag == 0:
+                                break
+                    img2 = Image.open(n)
+                    before_x, before_y = img2.size[0], img2.size[1]
+                    x = int(round(float(300 / float(before_y) * float(before_x))))
+                    y = 300
+                    img2.thumbnail((x*float(sizerate), y*float(sizerate)), Image.ANTIALIAS)
+                    #img2 = img2.resize((900,600),Image.ANTIALIAS)
+                    img2 = ImageTk.PhotoImage(img2)
+                    canvas = tkinter.Canvas(bg = "white", width=400, height=300)
+                    canvas.place(x=500, y=300)
+                    item = canvas.create_image(30, 30, image=img2, anchor=tkinter.NW)
+                    print("size")
+                    print(sizerate)
+                    print("int")
+                    print(interval)
+                    int_interval=float(interval)
+                    time.sleep(int_interval) 
+                    canvas.itemconfig(item,image=img2)
+                no=no+1
 
 
 
@@ -307,6 +362,11 @@ thread1.start()
 thread3 = threading.Thread(target=s.change_image2)
 thread3.start()
 
+thread4 = threading.Thread(target=s.change_image3)
+thread4.start()
+
+thread5 = threading.Thread(target=s.change_image4)
+thread5.start()
 
 
 #jpgの変更処理
