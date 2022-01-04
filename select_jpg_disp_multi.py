@@ -58,6 +58,11 @@ class image_gui():
         button2.grid(row=0, column=1)  
         button2.place(x=770, y=12) 
 
+        button2 = tk.Button(self.root, text = '実行シャッフル', command=self.quitsh)
+        button2.grid(row=0, column=1)  
+        button2.place(x=770, y=42) 
+
+
 
         #文字色、背景色、サイズ、フォントを指定。
         font1 = font.Font(family='Helvetica', size=12, weight='bold')
@@ -120,6 +125,10 @@ class image_gui():
 
 
     def quit(self):
+        self.root.destroy()
+
+    def quitsh(self):
+        random.shuffle(filenames)
         self.root.destroy()
 
 class sub_gui():
