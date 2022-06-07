@@ -22,6 +22,8 @@ from tkinter import font
 interval = 1.0
 sizerate = 1.0
 filenames =[]
+import webbrowser
+import os
 
 
 #最初の画面のクラス
@@ -59,6 +61,11 @@ class image_gui():
         button2 = tk.Button(self.root, text = '実行', command=self.quit)
         button2.grid(row=0, column=1)  
         button2.place(x=770, y=12) 
+
+        button4 = tk.Button(self.root, text = 'web実行', command=self.webslide)
+        button4.grid(row=0, column=1)  
+        button4.place(x=770, y=40) 
+
 
 
         #文字色、背景色、サイズ、フォントを指定。
@@ -106,7 +113,7 @@ class image_gui():
         filenames = []
         filenames = glob.glob('*.jpg')
         print(filenames)
-
+        self.filenames=filenames
 
     def button3_clicked(self):  
         global filenames
@@ -119,10 +126,62 @@ class image_gui():
         iDir = os.path.abspath(os.path.dirname(__file__)) 
         filenames = tkFileDialog.askopenfilenames(filetypes= [("Image file", ".bmp .png .jpg .tif"), ("Bitmap", ".bmp"), ("PNG", ".png"), ("JPEG", ".jpg"), ("Tiff", ".tif") ], initialdir=iDir)
         print(filenames)
+        self.filenames=filenames
 
 
     def quit(self):
         self.root.destroy()
+
+
+    def webslide(self):
+        SAMPLE_DIR = "C:\\html_link"
+ 
+        if not os.path.exists(SAMPLE_DIR):
+        # ディレクトリが存在しない場合、ディレクトリを作成する
+            os.makedirs(SAMPLE_DIR)       
+
+        f = open("C:\\html_link\\webslide.html", 'w')
+
+
+        datalist = []
+        datalist.append('<!DOCTYPE html>\n') 
+        datalist.append('<html>\n') 
+        datalist.append('<head>\n') 
+        datalist.append('<title> 画像表示 </title>\n') 
+        datalist.append('</head>\n') 
+        datalist.append('<body>\n') 
+        datalist.append('<img id = \"pic\" src = \"\"  width = "30%  height = "30%" >\n') 
+        datalist.append('<script>\n') 
+        datalist.append('const img = [\n') 
+
+        for file in self.filenames:
+            file_c = file.replace('\\', '\\\\');
+            print(file_c)
+            datalist.append('"'+file_c+'",\n') 
+
+        datalist.append('];\n') 
+        datalist.append('let count = -1;\n') 
+        datalist.append('jpgChange();\n') 
+        datalist.append('function jpgChange()\n') 
+        datalist.append('{\n') 
+        datalist.append('count++;\n') 
+        datalist.append('if (count == img.length) count = 0;\n') 
+        datalist.append('pic.src = img[count];\n') 
+        datalist.append('setTimeout(\"jpgChange()\",1000);\n') 
+        datalist.append('}\n') 
+        datalist.append('</script>\n') 
+        datalist.append('</body>\n') 
+        datalist.append('</html>\n') 
+
+        f.writelines(datalist)
+
+        f.close()
+
+
+
+        webbrowser.open('C:/html_link/webslide.html')
+
+
 
 class sub_gui():
     def __init__(self):
