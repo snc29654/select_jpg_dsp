@@ -152,7 +152,7 @@ class image_gui():
         datalist.append('<title> 画像表示 </title>\n') 
         datalist.append('</head>\n') 
         datalist.append('<body>\n') 
-        datalist.append('<img id = \"pic\" src = \"\"  width = "30%  height = "30%" >\n') 
+        datalist.append('<img id = \"pic\" src = \"\"  width = "30%"  height = "30%" >\n') 
         datalist.append('<script>\n') 
         datalist.append('const img = [\n') 
 
