@@ -107,13 +107,14 @@ class image_gui():
 
         global filenames
         ini_dir = 'C:'
-        ret = tkinter.filedialog.askdirectory(initialdir=ini_dir, title='file dialog test', mustexist = True)
-        print(str(ret))
-        os.chdir(str(ret))
+        self.ret = tkinter.filedialog.askdirectory(initialdir=ini_dir, title='file dialog test', mustexist = True)
+        print(str(self.ret))
+        os.chdir(str(self.ret))
         filenames = []
         filenames = glob.glob('*.jpg')
         print(filenames)
         self.filenames=filenames
+        self.dir = 1
 
     def button3_clicked(self):  
         global filenames
@@ -127,6 +128,7 @@ class image_gui():
         filenames = tkFileDialog.askopenfilenames(filetypes= [("Image file", ".bmp .png .jpg .tif"), ("Bitmap", ".bmp"), ("PNG", ".png"), ("JPEG", ".jpg"), ("Tiff", ".tif") ], initialdir=iDir)
         print(filenames)
         self.filenames=filenames
+        self.dir = 0
 
 
     def quit(self):
@@ -155,6 +157,8 @@ class image_gui():
         datalist.append('const img = [\n') 
 
         for file in self.filenames:
+            if self.dir==1:
+                file=self.ret+"\\"+file
             file_c = file.replace('\\', '\\\\');
             print(file_c)
             datalist.append('"'+file_c+'",\n') 
