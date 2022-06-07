@@ -46,6 +46,10 @@ class image_gui():
         self.txt4.place(x=330, y=30)
         self.txt4.insert(tkinter.END,"1.0")
 
+        self.txt5 = tkinter.Entry(width=10)
+        self.txt5.place(x=770, y=80)
+        self.txt5.insert(tkinter.END,"1000")
+
 
 
 
@@ -78,6 +82,12 @@ class image_gui():
         label4.pack(side="top")
         label4.place(x=400, y=28) 
 
+
+        label5 = tkinter.Label(self.root, text="webインターバル(ミリ秒）", fg="black", bg="white", font=font1)
+        label5.pack(side="top")
+        label5.place(x=550, y=80) 
+
+
         self.root.mainloop() 
 
     def check_value(self):
@@ -88,6 +98,8 @@ class image_gui():
 
 
         interval =self.txt2.get()
+
+
         global sizerate
         sizerate =self.txt4.get()
         
@@ -136,6 +148,10 @@ class image_gui():
 
 
     def webslide(self):
+
+        self.interval_web =self.txt5.get()
+
+
         SAMPLE_DIR = "C:\\html_link"
  
         if not os.path.exists(SAMPLE_DIR):
@@ -171,7 +187,11 @@ class image_gui():
         datalist.append('count++;\n') 
         datalist.append('if (count == img.length) count = 0;\n') 
         datalist.append('pic.src = img[count];\n') 
-        datalist.append('setTimeout(\"jpgChange()\",1000);\n') 
+        datalist.append('setTimeout(\"jpgChange()\",') 
+        datalist.append(self.interval_web) 
+        datalist.append(');\n') 
+
+
         datalist.append('}\n') 
         datalist.append('</script>\n') 
         datalist.append('</body>\n') 
