@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> ‰æ‘œ•\Ž¦ </title>
+</head>
+<body>
+<img id = "pic" src = ""  width = "50%"  height = "50%" >
+<script>
+const img = [
+"C:/jpg_folder/•—Œi\\P1000486.JPG",
+"C:/jpg_folder/•—Œi\\P1000487.JPG",
+"C:/jpg_folder/•—Œi\\P1000488.JPG",
+"C:/jpg_folder/•—Œi\\P1000489.JPG",
+"C:/jpg_folder/•—Œi\\P1000490.JPG",
+"C:/jpg_folder/•—Œi\\P1000491.JPG",
+"C:/jpg_folder/•—Œi\\P1000492.JPG",
+"C:/jpg_folder/•—Œi\\P1000493.JPG",
+"C:/jpg_folder/•—Œi\\P1000494.JPG",
+"C:/jpg_folder/•—Œi\\P1000495.JPG",
+"C:/jpg_folder/•—Œi\\P1000496.JPG",
+"C:/jpg_folder/•—Œi\\P1000497.JPG",
+"C:/jpg_folder/•—Œi\\P1000498.JPG",
+"C:/jpg_folder/•—Œi\\P1000499.JPG",
+"C:/jpg_folder/•—Œi\\P1000500.JPG",
+"C:/jpg_folder/•—Œi\\P1000501.JPG",
+"C:/jpg_folder/•—Œi\\P1000502.JPG",
+"C:/jpg_folder/•—Œi\\P1000503.JPG",
+"C:/jpg_folder/•—Œi\\P1000504.JPG",
+"C:/jpg_folder/•—Œi\\P1000505.JPG",
+"C:/jpg_folder/•—Œi\\P1000506.JPG",
+"C:/jpg_folder/•—Œi\\P1000509.jpg",
+];
+let count = -1;
+jpgChange();
+function jpgChange()
+{
+count++;
+if (count == img.length) count = 0;
+pic.src = img[count];
+setTimeout("jpgChange()",1000);
+}
+</script>
+</body>
+</html>

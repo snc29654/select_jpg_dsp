@@ -34,6 +34,7 @@ class image_gui():
         self.root.title("Image Viewer")  
         self.root.geometry("850x300") 
         self.cwd = os.getcwd()
+        print(self.cwd)
 
 
         self.txt2 = tkinter.Entry(width=10)
@@ -176,13 +177,13 @@ class image_gui():
         self.web_height =self.txt7.get()
 
         
-        SAMPLE_DIR = self.cwd
-        print(self.cwd)
-        #if not os.path.exists(SAMPLE_DIR):
+        SAMPLE_DIR = "C:\\html_link"
+ 
+        if not os.path.exists(SAMPLE_DIR):
         # ディレクトリが存在しない場合、ディレクトリを作成する
-        #    os.makedirs(SAMPLE_DIR)       
-        web_site=self.cwd+"\\webslide.html"
-        f = open(web_site, 'w')
+            os.makedirs(SAMPLE_DIR)       
+
+        f = open("C:\\html_link\\web.html", 'w')
 
 
         datalist = []
@@ -231,7 +232,7 @@ class image_gui():
 
 
 
-        webbrowser.open(web_site)
+        webbrowser.open('C:/html_link/web.html')
 
 
 
