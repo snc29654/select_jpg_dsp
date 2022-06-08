@@ -174,14 +174,15 @@ class image_gui():
         self.web_width =self.txt6.get()
         self.web_height =self.txt7.get()
 
-
-        SAMPLE_DIR = "C:\\html_link"
- 
-        if not os.path.exists(SAMPLE_DIR):
+        cwd = os.getcwd()
+        
+        SAMPLE_DIR = cwd
+        print(cwd)
+        #if not os.path.exists(SAMPLE_DIR):
         # ディレクトリが存在しない場合、ディレクトリを作成する
-            os.makedirs(SAMPLE_DIR)       
-
-        f = open("C:\\html_link\\webslide.html", 'w')
+        #    os.makedirs(SAMPLE_DIR)       
+        web_site=cwd+"\\webslide.html"
+        f = open(web_site, 'w')
 
 
         datalist = []
@@ -230,7 +231,7 @@ class image_gui():
 
 
 
-        webbrowser.open('C:/html_link/webslide.html')
+        webbrowser.open(web_site)
 
 
 
