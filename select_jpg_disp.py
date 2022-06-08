@@ -50,7 +50,13 @@ class image_gui():
         self.txt5.place(x=770, y=80)
         self.txt5.insert(tkinter.END,"1000")
 
+        self.txt6 = tkinter.Entry(width=10)
+        self.txt6.place(x=770, y=130)
+        self.txt6.insert(tkinter.END,"50%")
 
+        self.txt7 = tkinter.Entry(width=10)
+        self.txt7.place(x=770, y=160)
+        self.txt7.insert(tkinter.END,"50%")
 
 
         button1 = Button(self.root, text=u'フォルダー選択', command=self.button1_clicked)  
@@ -86,6 +92,14 @@ class image_gui():
         label5 = tkinter.Label(self.root, text="webインターバル(ミリ秒）", fg="black", bg="white", font=font1)
         label5.pack(side="top")
         label5.place(x=550, y=80) 
+
+        label6 = tkinter.Label(self.root, text="web写真width", fg="black", bg="white", font=font1)
+        label6.pack(side="top")
+        label6.place(x=550, y=130) 
+
+        label7 = tkinter.Label(self.root, text="web写真height", fg="black", bg="white", font=font1)
+        label7.pack(side="top")
+        label7.place(x=550, y=160) 
 
 
         self.root.mainloop() 
@@ -150,6 +164,8 @@ class image_gui():
     def webslide(self):
 
         self.interval_web =self.txt5.get()
+        self.web_width =self.txt6.get()
+        self.web_height =self.txt7.get()
 
 
         SAMPLE_DIR = "C:\\html_link"
@@ -168,7 +184,11 @@ class image_gui():
         datalist.append('<title> 画像表示 </title>\n') 
         datalist.append('</head>\n') 
         datalist.append('<body>\n') 
-        datalist.append('<img id = \"pic\" src = \"\"  width = "30%"  height = "30%" >\n') 
+        datalist.append('<img id = \"pic\" src = \"\"  width = "') 
+        datalist.append(self.web_width) 
+        datalist.append('"  height = "') 
+        datalist.append(self.web_height) 
+        datalist.append('" >\n') 
         datalist.append('<script>\n') 
         datalist.append('const img = [\n') 
 
