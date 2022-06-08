@@ -33,6 +33,7 @@ class image_gui():
         self.root = Tk()  
         self.root.title("Image Viewer")  
         self.root.geometry("850x300") 
+        self.cwd = os.getcwd()
 
 
         self.txt2 = tkinter.Entry(width=10)
@@ -174,14 +175,13 @@ class image_gui():
         self.web_width =self.txt6.get()
         self.web_height =self.txt7.get()
 
-        cwd = os.getcwd()
         
-        SAMPLE_DIR = cwd
-        print(cwd)
+        SAMPLE_DIR = self.cwd
+        print(self.cwd)
         #if not os.path.exists(SAMPLE_DIR):
         # ディレクトリが存在しない場合、ディレクトリを作成する
         #    os.makedirs(SAMPLE_DIR)       
-        web_site=cwd+"\\webslide.html"
+        web_site=self.cwd+"\\webslide.html"
         f = open(web_site, 'w')
 
 
