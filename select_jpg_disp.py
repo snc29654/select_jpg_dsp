@@ -76,6 +76,10 @@ class image_gui():
         button4.grid(row=0, column=1)  
         button4.place(x=770, y=40) 
 
+        button5 = tk.Button(self.root, text = '終了', command=self.endall)
+        button5.grid(row=0, column=1)  
+        button5.place(x=770, y=250) 
+
 
 
         #文字色、背景色、サイズ、フォントを指定。
@@ -160,7 +164,10 @@ class image_gui():
     def quit(self):
         self.root.destroy()
 
-
+    def endall(self):
+        sys.exit()
+        
+                
     def webslide(self):
 
         self.interval_web =self.txt5.get()
